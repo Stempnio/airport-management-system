@@ -1,3 +1,6 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 
-# Create your views here.
+
+def login_me(request):
+    return render(request, 'login.html', {'name': 'Userrito'})
