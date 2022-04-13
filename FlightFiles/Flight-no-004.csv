@@ -1,0 +1,32 @@
+Passport number;Name;Surname;Country;Boarding pass ID;Boarded
+ GH454747 ; Jan; Bieler;Germany;EX34123;False
+ GH565755 ; Mia; Krause;Germany;EX36156;Already boarded
+ UJ746235 ; Emma; Remus;Great Britain;EX38189;False
+ KF84U3P2 ; Marie; Cooper; USA;EX40222;Already boarded
+ KC489920 ; Lena; Red;Great Britain;EX42255;False
+ KD894492 ; Felix; Montgomery;USA;EX44288;False
+ DL482029 ; Max; Simpson;USA;EX46321;False
+ EE372024 ; Julian; Oldenburg;Luxembourg;EX48354;False
+ SS203039 ; Witold; Kujawinski;Poland;EX50387;Already boarded
+ DL394753 ; Wlodzimierz; Micha³ek;Poland;EX52420;False
+ DL220395 ; Szymon; Kwiek;Poland;EX54453;False
+ ZE3O3922 ; Olga; Larek;Poland;EX56486;False
+ OJ844840 ; Jaros³aw; Kwiatkowki;Poland;EX58519;False
+ VKR49394 ; Ivan; Malychev;Russia;EX60552;False
+ CL394849 ; Tadeusz; Razmus;Ukraine;EX62585;False
+ DF444002 ; Yaryna; Sych;Ukraine;EX64618;False
+ AA302MF3 ; Harry; Coldman;Great Britain;EX66651;False
+ 30493MMF ; Lucius; Malfoy;Great Britain;EX68684;False
+ 23DOE333 ; Taras; Petrenko;Ukraine;EX70717;False
+ RR394203 ; Peter; Oldenburg;Luxembourg;EX72750;Already boarded
+ IJ444932 ; Olivier; Twen;France;EX74783;False
+ FC389393 ; Caton; de Cavi;Spain;EX76816;False
+ WO483624 ; Jose; de Pola;Spain;EX78849;False
+ UE356832 ; Emiliano; del Pozo;Spain;EX80882;False
+ KE895398 ; Petr; Vasylev;Russia;EX82915;False
+ KD493920 ; Nikolay; Tarnowski;Belarus;EX84948;False
+ PR324500 ; Aleks; Mederski;Belarus;EX86981;False
+ AD204893 ; Ku; Mur;China;EX89014;False
+ DP299211 ; Kin; Sin;South Korea;EX91047;False
+ XPL93484 ; Caton; Orevue;France;EX93080;False
+ AD204894; Piotr; Kotowski;Poland;EX95113;False
