@@ -10,6 +10,8 @@
     </style>
 </head>
 <body>
+    {% if user.is_authenticated %}
+    <h1>Logged as {{ user.username }}</h1>
     <h2> The number of flight is {{flight_number}} </h2>
     {% if messages %}
     <ul class="messages">
@@ -44,5 +46,8 @@
             Submit
     </button>
     </form>
+    {% else %}
+    <h1>Access forbidden! Please log in bro</h1>
+    {% endif %}
 </body>
 </html>

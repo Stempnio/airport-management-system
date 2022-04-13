@@ -1,9 +1,21 @@
 <html>
+    <style>
+        h3{
+            color: red;
+        }
+    </style>
+    {% for message in messages %}
+    <h3>{{ message }}</h3>
+    {% endfor %}
     <body>
-        {% if name %}
-        <h1>Hello {{ name }}</h1>
-        {% else %}
-        <h1>Hello World</h1>
-        {% endif %}
+        <h1>Login now</h1>
+        <form action="login" method="POST">
+            {% csrf_token %}
+            <p>Username:</p>
+            <input type="text" name="username"/>
+            <p>Password:</p>
+            <input type="password" name="password"/><br>
+            <input type="submit"/>
+        </form>
     </body>
 </html>
