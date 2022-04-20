@@ -61,6 +61,13 @@
 <body>
     {% if user.is_authenticated %}
     <h1>Logged as {{ user.username }}</h1>
+
+    <a href="logout">
+        <button class="submit-btn">
+            Log out
+        </button>
+    </a>
+
     <h2> The number of flight is {{flight_number}} </h2>
     {% if messages %}
     <ul class="messages">

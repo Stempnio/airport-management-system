@@ -25,6 +25,11 @@ def login(request):
         return render(request, 'login.html')
 
 
+def logout(request):
+    auth.logout(request)
+    return redirect('/flights/login')
+
+
 def wanted_fugitives(request):
     img_list = os.listdir("flights/static/images/fugitives/")
     print(img_list)
@@ -71,7 +76,7 @@ def newboarded(flight_number, index):
     r = csv.reader(file, delimiter=';')
     lines = list(r)
 
-    lines[index+1][-1] = "Already boarded"
+    lines[index + 1][-1] = "Already boarded"
     file.close()
 
     file = open(file_path, 'w', newline='')
