@@ -1,15 +1,49 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+
+        img#fugitive {
+            width: 300px;
+            height: 380px;
+        }
+
+        .images {
+              animation: MoveDown linear infinite forwards;
+              animation-duration: calc({{ images|length }}*1.5*1s);
+              position: absolute;
+              left: 0;
+              bottom: 0;
+        }
+
+        body {
+            overflow-y: hidden;
+        }
+
+        {#@keyframes MoveDown {#}
+        {#    0%    { top: 0; }#}
+        {#    100% {top: calc(-100% * {{ images|length }}/12)}#}
+        {#}#}
+
+        @keyframes MoveDown {
+            0%    { transform: translateY(0); }
+            100%  { transform: translateY(50%); }
+        }
+
+    </style>
 </head>
 <body>
     <b>Wanted fugitives</b><br>
-    {% for image in images %}
-        {% load static %}
-        <img src="{% static 'images/fugitives' %}/{{image}}" alt="{{ image }}">
-    {% endfor %}
+    <div class="images">
+        {% for loop in '12'|make_list%}
+            {% for image in images %}
+                <img src="{% static 'images/fugitives' %}/{{image}}" id="fugitive" alt="{{ image }}">
+            {% endfor %}
+        {% endfor %}
+    </div>
     <!-- SOURCE: https://www.fbi.gov/wanted/fugitives -->
 </body>
 </html>
