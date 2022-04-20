@@ -1,6 +1,10 @@
+import os
+
 from django.shortcuts import render, redirect
 from django.contrib import messages, auth
 import csv
+
+from airport_management_system import settings
 
 
 def login(request):
@@ -19,6 +23,13 @@ def login(request):
             return redirect('login')
     else:
         return render(request, 'login.html')
+
+
+def wanted_fugitives(request):
+    img_list = os.listdir("flights/static/images/fugitives/")
+    print(img_list)
+    context = {"images": img_list}
+    return render(request, 'fugitives.html', context)
 
 
 def read_flight_file(flight_number):

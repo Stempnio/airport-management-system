@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <b>Wanted fugitives</b><br>
+    {% for image in images %}
+        {% load static %}
+        <img src="{% static 'images/fugitives' %}/{{image}}" alt="{{ image }}">
+    {% endfor %}
+    <!-- SOURCE: https://www.fbi.gov/wanted/fugitives -->
+</body>
+</html>
