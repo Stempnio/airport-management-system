@@ -8,8 +8,18 @@
     <h3>{{ message }}</h3>
     {% endfor %}
     <body>
-        <h1>Login now</h1>
-        <form action="login" method="POST">
+        {% if user.is_authenticated %}
+            <h1>You are logged as {{ user }}</h1>
+            <h2>Continue or log out</h2>
+            <a href="boarding">
+                <button>Continue as {{ user }}</button>
+            </a>
+            <a href="boarding/logout">
+                <button>Log out</button>
+            </a>
+        {% else %}
+            <h1>Login now</h1>
+            <form action="login" method="POST">
             {% csrf_token %}
             <p>Username:</p>
             <input type="text" name="username"/>
@@ -17,5 +27,6 @@
             <input type="password" name="password"/><br>
             <input type="submit"/>
         </form>
+        {% endif %}
     </body>
 </html>

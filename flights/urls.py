@@ -3,6 +3,7 @@ from . import views
 
 # URLConf
 urlpatterns = [
+    path('', views.redirect_to_login),
     path('login', views.login, name='login'),
     path('boarding/logout', views.logout, name='logout'),
     path('security/fugitives', views.wanted_fugitives),
