@@ -1,5 +1,6 @@
 import os
-
+from os.path import join, isfile
+from os import listdir
 from django.shortcuts import render, redirect
 from django.contrib import messages, auth
 import csv
@@ -16,7 +17,7 @@ def login(request):
 
         if user is not None:
             auth.login(request, user)
-            return redirect('/flights/boarding/004')
+            return redirect('/flights/boarding')
         else:
             print('Credentials Invalid')
             messages.info(request, 'Credentials Invalid')
@@ -99,3 +100,17 @@ def boarding(request, flight_number):
         messages.info(request, "There is no data about such a flight")
 
     return render(request, 'boarding.html', {'flight_number': flight_number, 'header': header, 'rows': rows})
+
+
+def flight_list(request):
+    print(flight_files())
+    context = flight_files()
+    return render(request, 'flight_list.html', {'flights': context})
+
+
+def flight_files():
+    files_path = "FlightFiles/"
+    files = [(f.removesuffix('.csv'), f.removesuffix('.csv').removeprefix("Flight-no-"))
+             for f in listdir(files_path)
+             if isfile(join(files_path, f))]
+    return files
