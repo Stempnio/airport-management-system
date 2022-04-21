@@ -4,6 +4,7 @@ from os import listdir
 from django.shortcuts import render, redirect
 from django.contrib import messages, auth
 import csv
+from operator import itemgetter
 
 from airport_management_system import settings
 
@@ -83,7 +84,10 @@ def newboarded(flight_number, index):
     file = open(file_path, 'w', newline='')
     csvwriter = csv.writer(file, delimiter=';')
 
-    csvwriter.writerows(lines)
+    sorted_lines = sorted(lines[1:], key=itemgetter(5), reverse=True)  # sort without header
+    sorted_lines.insert(0, lines[0])
+    print(sorted_lines)
+    csvwriter.writerows(sorted_lines)
     file.close()
 
 
