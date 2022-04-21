@@ -9,10 +9,6 @@ from operator import itemgetter
 from airport_management_system import settings
 
 
-def redirect_to_login(request):
-    return redirect('flights/login')
-
-
 def login(request):
     if request.method == 'POST':
         username = request.POST['username']
