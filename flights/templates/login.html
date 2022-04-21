@@ -1,12 +1,8 @@
+{% load static %}
 <html>
-    <style>
-        h3{
-            color: red;
-        }
-    </style>
-    {% for message in messages %}
-    <h3>{{ message }}</h3>
-    {% endfor %}
+    <head>
+        <link rel="stylesheet" href="{% static 'login_page/style.css' %}">
+    </head>
     <body>
         {% if user.is_authenticated %}
             <h1>You are logged as {{ user }}</h1>
@@ -18,15 +14,32 @@
                 <button>Log out</button>
             </a>
         {% else %}
-            <h1>Login now</h1>
-            <form action="login" method="POST">
-            {% csrf_token %}
-            <p>Username:</p>
-            <input type="text" name="username"/>
-            <p>Password:</p>
-            <input type="password" name="password"/><br>
-            <input type="submit"/>
-        </form>
+            <div id="title">Cracow International Airport</div>
+            <div id="airplane_img"><img src="{% static 'login_page/airplane2.png' %}"></div>
+            {% for message in messages %}
+                <h3>{{ message }}</h3>
+                <script type="text/javascript">
+                   window.onload = function() {
+                       document.getElementById("container").style.paddingTop = "105px";
+                       console.log(document.getElementById('container'));
+                   }
+                </script>
+            {% endfor %}
+            <div id="container">
+                <form action="login" method="POST" >
+                    <div class="form-field">
+                        <input type="text" name="username" placeholder="Username" required />
+                    </div>
+                    <div class="form-field">
+                        <input type="password" name="password" autocomplete="do-not-autofill" placeholder="Password" required /><br>
+                    </div>
+                    <div class="form-field">
+                        <button class="btn" type="submit">Log in</button>
+                    </div>
+                    {% csrf_token %}
+                </form>
+            </div>
+
         {% endif %}
     </body>
 </html>
