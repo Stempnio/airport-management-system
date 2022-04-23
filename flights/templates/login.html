@@ -14,16 +14,21 @@
                 <button>Log out</button>
             </a>
         {% else %}
-            <div id="title">Cracow International Airport</div>
-            <div id="airplane_img"><img src="{% static 'login_page/airplane2.png' %}"></div>
+            <div id="title">Cracow Airport</div>
+            <div id="airplane_div">
+                <img id="airplane_img" src="{% static 'login_page/airplane2.png' %}">
+            </div>
+
             {% for message in messages %}
+                <div id="message_box">
                 <h3>{{ message }}</h3>
                 <script type="text/javascript">
                    window.onload = function() {
-                       document.getElementById("container").style.paddingTop = "105px";
+                       document.getElementById("airplane_div").style.paddingBottom = "140px";
                        console.log(document.getElementById('container'));
                    }
                 </script>
+                </div>
             {% endfor %}
             <div id="container">
                 <form action="login" method="POST" >

@@ -26,7 +26,11 @@ with open('secret_key.txt') as f:
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
+
+# To access server from other devices
+#                Server IP
+ALLOWED_HOSTS = ['192.168.0.101', 'localhost', '127.0.0.1']
 
 
 # Application definition
