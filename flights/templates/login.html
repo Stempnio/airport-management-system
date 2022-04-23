@@ -5,14 +5,20 @@
     </head>
     <body>
         {% if user.is_authenticated %}
-            <h1>You are logged as {{ user }}</h1>
-            <h2>Continue or log out</h2>
-            <a href="boarding">
-                <button>Continue as {{ user }}</button>
-            </a>
-            <a href="boarding/logout">
-                <button>Log out</button>
-            </a>
+                <h1 id="title">You are logged as {{ user }}</h1>
+{#                <h2 id="title">Continue or log out</h2>#}
+            <div class="center">
+                <div style="padding-right: 700px">
+                    <a href="boarding">
+                        <button class="continue_log_out_btns">Continue as {{ user }}</button>
+                    </a>
+                </div>
+                <div style="padding-left: 400px">
+                <a href="boarding/logout">
+                    <button class="continue_log_out_btns">Log out</button>
+                </a>
+                </div>
+            </div>
         {% else %}
             <div id="title">Cracow Airport</div>
             <div id="airplane_div">
