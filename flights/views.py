@@ -94,16 +94,29 @@ def newboarded(flight_number, index):
 def boarding(request, flight_number):
     try:
         if request.method == 'POST':
-            boarded = request.POST.get("resently_boarded", None)
-            newboarded(flight_number, int(boarded))
+            print("request.method == 'POST'")
+            if 'resently_boarded' in request.POST:
+                boarded = request.POST.get("resently_boarded", None)
+                newboarded(flight_number, int(boarded))
+                print("Inside 'resently_boarded' POST")
+            elif 'start_boarding' in request.POST:
+                change_boarding_state(flight_number, "Started")
+                print("Inside 'start_boarding' POST")
+            elif 'end_boarding' in request.POST:
+                change_boarding_state(flight_number, "Ended")
 
         header, rows = read_flight_file(flight_number)
+        data_info, data, boarding_status = read_flight_data(flight_number)
     except FileNotFoundError:
         header = []
         rows = []
+        data_info = []
+        data = []
+        boarding_status = []
         messages.info(request, "There is no data about such a flight")
 
-    return render(request, 'boarding.html', {'flight_number': flight_number, 'header': header, 'rows': rows})
+    return render(request, 'boarding.html', {'flight_number': flight_number, 'header': header, 'rows': rows,
+                                             'data_info': data_info, 'data': data, 'boarding_status': boarding_status})
 
 
 def flight_list(request):
@@ -116,5 +129,39 @@ def flight_files():
     files_path = "FlightFiles/"
     files = [(f.removesuffix('.csv'), f.removesuffix('.csv').removeprefix("Flight-no-"))
              for f in listdir(files_path)
-             if isfile(join(files_path, f))]
+             if isfile(join(files_path, f)) and not is_data_file(f)]
     return files
+
+
+def is_data_file(file_name):
+    return len(file_name) == 22
+
+
+def read_flight_data(flight_number):
+    file_path = 'FlightFiles/Flight-no-' + flight_number + '-data' + '.csv'
+    file = open(file_path)
+    csvreader = csv.reader(file, delimiter=';')
+
+    data_info = next(csvreader)
+    data = next(csvreader)
+
+    boarding_status = data[len(data)-1]
+    print("boarding_started: " + boarding_status)
+
+    file.close()
+    return data_info, data, boarding_status
+
+
+def change_boarding_state(flight_number, state):
+    file_path = 'FlightFiles/Flight-no-' + flight_number + '-data'+'.csv'
+    file = open(file_path)
+    r = csv.reader(file, delimiter=';')
+    lines = list(r)
+
+    lines[1][-1] = state
+    file.close()
+
+    file = open(file_path, 'w', newline='')
+    csvwriter = csv.writer(file, delimiter=';')
+    csvwriter.writerows(lines)
+    file.close()

@@ -1,62 +1,15 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="{% static 'boarding_page/style.css' %}">
     <script>
         function scrollToSubmitButton() {
           document.getElementById("submit-btn").scrollIntoView();
         }
     </script>
-    <style>
-        html {
-          scroll-behavior: smooth;
-        }
-
-        .main-table {
-            width: 90%;
-            border-collapse: collapse;
-            border-radius: 10px 10px 0 0;
-            overflow: hidden;
-            box-shadow: 0 0 30px rgba(0,0,0,0.20);
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .main-table td {
-            text-align: center;
-            padding: 5px 5px;
-        }
-
-        .main-table tr {
-            border-bottom: 1px solid black;
-        }
-
-        .main-table tr:nth-of-type(even){
-            background-color: #f3f3f3;
-        }
-
-        .main-table th {
-            background-color: #252546;
-            color: white;
-            padding: 10px 10px;
-        }
-
-        .submit-btn {
-            transition-duration: 0.4s;
-            background-color: #3a3a75;
-            color: white;
-            border-radius: 5px;
-            padding: 10px 10px;
-            border: none;
-        }
-
-        .submit-btn:hover {
-            background-color: white;
-            color: black;
-            border: 1px solid black;
-        }
-    </style>
 </head>
 <body>
     {% if user.is_authenticated %}
@@ -68,14 +21,37 @@
         </button>
     </a>
 
-    <h2> The number of flight is {{flight_number}} </h2>
-    {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-        {% endfor %}
-    </ul>
+{#        flight_data_start#}
+        <table class="data-info-table th">
+            <tr>
+                {% for property in data_info %}
+                    <th>{{ property }}</th>
+                {% endfor %}
+            </tr>
+                {% for property_data in data %}
+                    <td>{{ property_data }}</td>
+                {% endfor %}
+
+        </table>
+{#        flight_data_end#}
+    <div style="text-align: center; padding-top: 30px; padding-bottom: 80px">
+    {% if boarding_status == "Not started" %}
+        <form action="" method="post">
+         {% csrf_token %}
+            <button class="submit-btn" type="submit" name="start_boarding">
+                Start boarding
+            </button>
+        </form>
+    {% elif boarding_status == "Started" %}
+        <form action="" method="post">
+         {% csrf_token %}
+            <button class="submit-btn" type="submit" name="end_boarding">
+                End boarding
+            </button>
+        </form>
     {% endif %}
+    </div>
+
     <form action="" method="post">
      {% csrf_token %}
     <table class="main-table">
@@ -100,9 +76,11 @@
             </tr>
         {% endfor %}
     </table>
+        {% if boarding_status == "Started" %}
         <button id="submit-btn" class="submit-btn" type="submit">
             Submit
         </button>
+        {% endif %}
     </form>
     {% else %}
     <h1>Access forbidden! Please log in bro</h1>
