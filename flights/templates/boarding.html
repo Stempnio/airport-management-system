@@ -6,6 +6,23 @@
     <title>Title</title>
     <link rel="stylesheet" href="{% static 'boarding_page/style.css' %}">
     <link rel="stylesheet" href="{% static 'general/style.css' %}">
+    <style>
+        .submit-btn {
+            transition-duration: 0.4s;
+            background-color: #3a3a75;
+            color: white;
+            border-radius: 5px;
+            padding: 10px 10px;
+            border: none;
+            font-weight: bold;
+        }
+
+        .submit-btn:hover {
+            background-color: red;
+            color: white;
+            border: 1px solid #4A4A4A;
+        }
+    </style>
     <script>
         function scrollToSubmitButton() {
             document.getElementById("submit-btn").scrollIntoView();
@@ -44,7 +61,7 @@
 
     </table>
     {#        flight_data_end#}
-    <div style="text-align: center; padding-top: 30px; padding-bottom: 80px">
+    <div style="text-align: center; padding-top: 30px; padding-bottom: 30px">
         {% if boarding_status == "Not started" %}
             <form action="" method="post">
                 {% csrf_token %}
@@ -55,15 +72,20 @@
         {% elif boarding_status == "Started" %}
             <form action="" method="post">
                 {% csrf_token %}
-                <button class="btn" type="submit" name="end_boarding">
+                <button class="submit-btn" type="submit" name="end_boarding">
                     End boarding
                 </button>
             </form>
+        {% else  %}
+            <div class="message_box">
+                <h3>Boarding has ended</h3>
+            </div>
         {% endif %}
     </div>
 
     <form action="" method="post">
         {% csrf_token %}
+
         <table class="main-table">
             <tr>
                 {% for property in header %}
@@ -86,10 +108,14 @@
                 </tr>
             {% endfor %}
         </table>
+
+
         {% if boarding_status == "Started" %}
-            <button id="submit-btn" class="btn" type="submit">
-                Submit
-            </button>
+            <div style="text-align: center;padding-top:30px; padding-bottom: 30px">
+                <button id="submit-btn" class="btn" type="submit">
+                    Board passenger
+                </button>
+            </div>
         {% endif %}
     </form>
 {% else %}
@@ -105,8 +131,8 @@
         let time = now.getHours() + ':' + now.getMinutes() + ":" + now.getSeconds()
 
         let date = [now.getDate(),
-                    months[now.getMonth()],
-                    now.getFullYear()].join(' ');
+            months[now.getMonth()],
+            now.getFullYear()].join(' ');
 
         document.getElementById('time').innerHTML = [date, time].join(' / ');
 
