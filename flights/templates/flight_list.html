@@ -36,7 +36,13 @@
                         </div>
                         <div class="flight_row_content_right">
                             <h2>Destination: {{ destination }}</h2>
-                            <h2>Boarding: {{ boarding_state }}</h2>
+                            {% if boarding_state == "Ended" %}
+                                <h2 style="color:red;">Boarding: {{ boarding_state }}</h2>
+                            {% elif boarding_state == "Started" %}
+                                <h2 style="color:green;">Boarding: {{ boarding_state }}</h2>
+                            {% else %}
+                                <h2>Boarding: {{ boarding_state }}</h2>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
