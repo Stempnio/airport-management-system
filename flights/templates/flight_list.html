@@ -31,9 +31,13 @@
                         <h2>{{ departure_time }}</h2>
                     </div>
                     <div class="flight_row_content">
-                        <h2>Flight: {{ number_of_flight }}</h2>
-                        <h2>Destination: {{ destination }}</h2>
-                        <h2>Boarding: {{ boarding_state }}</h2>
+                        <div class="flight_row_content_left">
+                            <h2>Flight: {{ number_of_flight }}</h2>
+                        </div>
+                        <div class="flight_row_content_right">
+                            <h2>Destination: {{ destination }}</h2>
+                            <h2>Boarding: {{ boarding_state }}</h2>
+                        </div>
                     </div>
                 </div>
                 </a>
