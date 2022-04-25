@@ -3,6 +3,7 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="{% static 'general/style.css' %}">
+    <link rel="stylesheet" href="{% static 'flight_list_page/style.css' %}">
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
@@ -21,11 +22,23 @@
         </a>
         </header>
 
-        {% for flight, number_of_flight in flights %}
-            <a href="{{ number_of_flight }}">
-                <h2>{{ flight }}</h2>
-            </a>
-        {% endfor %}
+        <div class="flight_list">
+            {% for flight_name, number_of_flight, destination, departure_date, departure_time, boarding_state in flights %}
+                <a href="{{ number_of_flight }}" style="text-decoration: none">
+                <div class="flight_row">
+                    <div class="flight_row_header">
+                        <h2>{{ departure_date }}</h2>
+                        <h2>{{ departure_time }}</h2>
+                    </div>
+                    <div class="flight_row_content">
+                        <h2>Flight: {{ number_of_flight }}</h2>
+                        <h2>Destination: {{ destination }}</h2>
+                        <h2>Boarding: {{ boarding_state }}</h2>
+                    </div>
+                </div>
+                </a>
+            {% endfor %}
+        </div>
     {% else %}
         <h1>Access forbidden! Please log in bro</h1>
     {%  endif %}

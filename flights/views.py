@@ -130,11 +130,32 @@ def flight_files():
     files = [(f.removesuffix('.csv'), f.removesuffix('.csv').removeprefix("Flight-no-"))
              for f in listdir(files_path)
              if isfile(join(files_path, f)) and not is_data_file(f)]
-    return files
+
+    result = []
+    for flight_file_name, flight_number in files:
+        data_file_path = join(files_path, flight_file_name + "-data.csv")
+        if isfile(data_file_path):
+            file = open(data_file_path)
+            r = csv.reader(file, delimiter=';')
+            lines = list(r)
+
+            destination = lines[1][0]
+            departure_date = lines[1][1]
+            departure_time = lines[1][2]
+            boarding_state = lines[1][4]
+            file.close()
+
+            result.append(
+                (flight_file_name, flight_number,
+                 destination, departure_date,
+                 departure_time, boarding_state))
+
+    return sorted(result, key=(itemgetter(3)), reverse=True)
 
 
 def is_data_file(file_name):
-    return len(file_name) == 22
+    return "data" in file_name
+    # return len(file_name) == 22
 
 
 def read_flight_data(flight_number):
@@ -145,7 +166,7 @@ def read_flight_data(flight_number):
     data_info = next(csvreader)
     data = next(csvreader)
 
-    boarding_status = data[len(data)-1]
+    boarding_status = data[len(data) - 1]
     print("boarding_started: " + boarding_status)
 
     file.close()
@@ -153,7 +174,7 @@ def read_flight_data(flight_number):
 
 
 def change_boarding_state(flight_number, state):
-    file_path = 'FlightFiles/Flight-no-' + flight_number + '-data'+'.csv'
+    file_path = 'FlightFiles/Flight-no-' + flight_number + '-data' + '.csv'
     file = open(file_path)
     r = csv.reader(file, delimiter=';')
     lines = list(r)
