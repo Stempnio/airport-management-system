@@ -1,11 +1,26 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="{% static 'general/style.css' %}">
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
     {% if user.is_authenticated %}
+
+        <header>
+        <h4 class="time menu_item" id="time"></h4>
+
+        <h4 class="menu_item">Logged as {{ user.username }}</h4>
+
+        <a href="logout" class="menu_item">
+            <button class="btn">
+                Log out
+            </button>
+        </a>
+        </header>
+
         {% for flight, number_of_flight in flights %}
             <a href="{{ number_of_flight }}">
                 <h2>{{ flight }}</h2>
@@ -15,5 +30,23 @@
         <h1>Access forbidden! Please log in bro</h1>
     {%  endif %}
 
+<script>
+    function updateClock() {
+        let now = new Date()
+        let months = ['January', 'February', 'March', 'April',
+            'May', 'June', 'July', 'August', 'September',
+            'October', 'November', 'December'];
+        let time = now.getHours() + ':' + now.getMinutes() + ":" + now.getSeconds()
+
+        let date = [now.getDate(),
+                    months[now.getMonth()],
+                    now.getFullYear()].join(' ');
+
+        document.getElementById('time').innerHTML = [date, time].join(' / ');
+
+        setTimeout(updateClock, 1000);
+    }
+    updateClock(); // initial call
+</script>
 </body>
 </html>

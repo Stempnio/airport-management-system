@@ -5,85 +5,114 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="{% static 'boarding_page/style.css' %}">
+    <link rel="stylesheet" href="{% static 'general/style.css' %}">
     <script>
         function scrollToSubmitButton() {
-          document.getElementById("submit-btn").scrollIntoView();
+            document.getElementById("submit-btn").scrollIntoView();
         }
     </script>
 </head>
 <body>
-    {% if user.is_authenticated %}
-    <h1>Logged as {{ user.username }}</h1>
+{% if user.is_authenticated %}
+    <header>
+        <h4 class="time menu_item" id="time"></h4>
 
-    <a href="logout">
-        <button class="submit-btn">
-            Log out
-        </button>
-    </a>
+        <h4 class="menu_item">Logged as {{ user.username }}</h4>
 
-{#        flight_data_start#}
-        <table class="data-info-table th">
-            <tr>
-                {% for property in data_info %}
-                    <th>{{ property }}</th>
-                {% endfor %}
-            </tr>
-                {% for property_data in data %}
-                    <td>{{ property_data }}</td>
-                {% endfor %}
-
-        </table>
-{#        flight_data_end#}
-    <div style="text-align: center; padding-top: 30px; padding-bottom: 80px">
-    {% if boarding_status == "Not started" %}
-        <form action="" method="post">
-         {% csrf_token %}
-            <button class="submit-btn" type="submit" name="start_boarding">
-                Start boarding
+        <a href="logout" class="menu_item">
+            <button class="btn">
+                Log out
             </button>
-        </form>
-    {% elif boarding_status == "Started" %}
-        <form action="" method="post">
-         {% csrf_token %}
-            <button class="submit-btn" type="submit" name="end_boarding">
-                End boarding
-            </button>
-        </form>
-    {% endif %}
-    </div>
+        </a>
+    </header>
 
-    <form action="" method="post">
-     {% csrf_token %}
-    <table class="main-table">
+    {% for message in messages %}
+        <div class="message_box">
+            <h3>{{ message }}</h3>
+        </div>
+    {% endfor %}
+    {#        flight_data_start#}
+    <table class="data-info-table th">
         <tr>
-            {% for property in header %}
+            {% for property in data_info %}
                 <th>{{ property }}</th>
             {% endfor %}
         </tr>
-        {% for passenger, index in rows %}
+        {% for property_data in data %}
+            <td>{{ property_data }}</td>
+        {% endfor %}
+
+    </table>
+    {#        flight_data_end#}
+    <div style="text-align: center; padding-top: 30px; padding-bottom: 80px">
+        {% if boarding_status == "Not started" %}
+            <form action="" method="post">
+                {% csrf_token %}
+                <button class="btn" type="submit" name="start_boarding">
+                    Start boarding
+                </button>
+            </form>
+        {% elif boarding_status == "Started" %}
+            <form action="" method="post">
+                {% csrf_token %}
+                <button class="btn" type="submit" name="end_boarding">
+                    End boarding
+                </button>
+            </form>
+        {% endif %}
+    </div>
+
+    <form action="" method="post">
+        {% csrf_token %}
+        <table class="main-table">
             <tr>
-                {% for property in passenger %}
-                    {% if property == 'False' %}
-                        <td>
-                            <label for="l_box1">
-                                <input type="radio" name="resently_boarded" onclick="scrollToSubmitButton()" value="{{ index }}">
-                            </label>
-                        </td>
-                    {% else %}
-                        <td>{{ property }}</td>
-                    {% endif %}
+                {% for property in header %}
+                    <th>{{ property }}</th>
                 {% endfor %}
             </tr>
-        {% endfor %}
-    </table>
+            {% for passenger, index in rows %}
+                <tr>
+                    {% for property in passenger %}
+                        {% if property == 'False' %}
+                            <td>
+                                <label for="l_box1">
+                                    <input type="radio" name="resently_boarded" onclick="scrollToSubmitButton()" value="{{ index }}">
+                                </label>
+                            </td>
+                        {% else %}
+                            <td>{{ property }}</td>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
         {% if boarding_status == "Started" %}
-        <button id="submit-btn" class="submit-btn" type="submit">
-            Submit
-        </button>
+            <button id="submit-btn" class="btn" type="submit">
+                Submit
+            </button>
         {% endif %}
     </form>
-    {% else %}
+{% else %}
     <h1>Access forbidden! Please log in bro</h1>
-    {% endif %}
+{% endif %}
+
+<script>
+    function updateClock() {
+        let now = new Date()
+        let months = ['January', 'February', 'March', 'April',
+            'May', 'June', 'July', 'August', 'September',
+            'October', 'November', 'December'];
+        let time = now.getHours() + ':' + now.getMinutes() + ":" + now.getSeconds()
+
+        let date = [now.getDate(),
+                    months[now.getMonth()],
+                    now.getFullYear()].join(' ');
+
+        document.getElementById('time').innerHTML = [date, time].join(' / ');
+
+        setTimeout(updateClock, 1000);
+    }
+    updateClock(); // initial call
+</script>
 </body>
 </html>

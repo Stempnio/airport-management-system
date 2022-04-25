@@ -2,6 +2,7 @@
 <html>
     <head>
         <link rel="stylesheet" href="{% static 'login_page/style.css' %}">
+        <link rel="stylesheet" href="{% static 'general/style.css' %}">
     </head>
     <body>
         {% if user.is_authenticated %}
@@ -26,7 +27,7 @@
             </div>
 
             {% for message in messages %}
-                <div id="message_box">
+                <div class="message_box">
                 <h3>{{ message }}</h3>
                 <script type="text/javascript">
                    window.onload = function() {
