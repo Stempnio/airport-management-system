@@ -121,24 +121,6 @@
 {% else %}
     <h1>Access forbidden! Please log in bro</h1>
 {% endif %}
-
-<script>
-    function updateClock() {
-        let now = new Date()
-        let months = ['January', 'February', 'March', 'April',
-            'May', 'June', 'July', 'August', 'September',
-            'October', 'November', 'December'];
-        let time = now.getHours() + ':' + now.getMinutes() + ":" + now.getSeconds()
-
-        let date = [now.getDate(),
-            months[now.getMonth()],
-            now.getFullYear()].join(' ');
-
-        document.getElementById('time').innerHTML = [date, time].join(' / ');
-
-        setTimeout(updateClock, 1000);
-    }
-    updateClock(); // initial call
-</script>
+<script src="{% static 'general/scripts.js' %}"></script>
 </body>
 </html>

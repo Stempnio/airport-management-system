@@ -1,10 +1,10 @@
 Passport number;Name;Surname;Country;Boarding pass ID;Boarded
- KD493920 ; Nikolay; Tarnowski;Belarus;EX84948;False
  PR324500 ; Aleks; Mederski;Belarus;EX86981;False
  AD204893 ; Ku; Mur;China;EX89014;False
  DP299211 ; Kin; Sin;South Korea;EX91047;False
  XPL93484 ; Caton; Orevue;France;EX93080;False
  AD204894; Piotr; Kotowski;Poland;EX95113;False
+ KD493920 ; Nikolay; Tarnowski;Belarus;EX84948;Already boarded
  KE895398 ; Petr; Vasylev;Russia;EX82915;Already boarded
  UE356832 ; Emiliano; del Pozo;Spain;EX80882;Already boarded
  WO483624 ; Jose; de Pola;Spain;EX78849;Already boarded

@@ -6,8 +6,7 @@
     </head>
     <body>
         {% if user.is_authenticated %}
-                <h1 id="title">You are logged as {{ user }}</h1>
-{#                <h2 id="title">Continue or log out</h2>#}
+            <h1 id="title">You are logged as {{ user }}</h1>
             <div class="center">
                 <div style="padding-right: 700px">
                     <a href="boarding">
@@ -51,7 +50,6 @@
                     {% csrf_token %}
                 </form>
             </div>
-
         {% endif %}
     </body>
 </html>
