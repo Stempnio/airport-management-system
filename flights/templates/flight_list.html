@@ -5,13 +5,20 @@
     <link rel="stylesheet" href="{% static 'general/style.css' %}">
     <link rel="stylesheet" href="{% static 'flight_list_page/style.css' %}">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Flight list</title>
 </head>
 <body>
-    {% if user.is_authenticated %}
+{% if user.is_authenticated %}
 
-        <header>
-        <h4 class="time menu_item" id="time"></h4>
+    <header>
+        <h4 class="menu_item" id="time"></h4>
+
+        <button
+                class="menu_item time btn"
+                onclick="window.open('/flights/security/fugitives','fugitivesWindow','width=1280,height=720')"
+        >
+            Wanted fugitives
+        </button>
 
         <h4 class="menu_item">Logged as {{ user.username }}</h4>
 
@@ -20,11 +27,11 @@
                 Log out
             </button>
         </a>
-        </header>
+    </header>
 
-        <div class="flight_list">
-            {% for flight_name, number_of_flight, destination, departure_date, departure_time, boarding_state in flights %}
-                <a href="{{ number_of_flight }}" style="text-decoration: none">
+    <div class="flight_list">
+        {% for flight_name, number_of_flight, destination, departure_date, departure_time, boarding_state in flights %}
+            <a href="{{ number_of_flight }}" style="text-decoration: none">
                 <div class="flight_row">
                     <div class="flight_row_header">
                         <h2>{{ departure_date }}</h2>
@@ -46,12 +53,12 @@
                         </div>
                     </div>
                 </div>
-                </a>
-            {% endfor %}
-        </div>
-    {% else %}
-        <h1>Access forbidden! Please log in bro</h1>
-    {%  endif %}
+            </a>
+        {% endfor %}
+    </div>
+{% else %}
+    <h1>Access forbidden! Please log in bro</h1>
+{%  endif %}
 
 <script src="{% static 'general/scripts.js' %}"></script>
 </body>
