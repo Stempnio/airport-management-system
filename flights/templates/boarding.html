@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{% static 'boarding_page/style.css' %}">
     <link rel="stylesheet" href="{% static 'general/style.css' %}">
     <style>
-        .submit-btn {
+        .end-boarding-btn {
             transition-duration: 0.4s;
             background-color: #3a3a75;
             color: white;
@@ -17,7 +17,7 @@
             font-weight: bold;
         }
 
-        .submit-btn:hover {
+        .end-boarding-btn:hover {
             background-color: red;
             color: white;
             border: 1px solid #4A4A4A;
@@ -32,8 +32,13 @@
 <body>
 {% if user.is_authenticated %}
     <header>
-        <h4 class="time menu_item" id="time"></h4>
+        <h4 class="menu_item" id="time"></h4>
 
+        <a href="/flights/boarding" class="menu_item time">
+            <button class="btn">
+                Go back
+            </button>
+        </a>
         <h4 class="menu_item">Logged as {{ user.username }}</h4>
 
         <a href="logout" class="menu_item">
@@ -72,11 +77,11 @@
         {% elif boarding_status == "Started" %}
             <form action="" method="post">
                 {% csrf_token %}
-                <button class="submit-btn" type="submit" name="end_boarding">
+                <button class="end-boarding-btn" type="submit" name="end_boarding">
                     End boarding
                 </button>
             </form>
-        {% else  %}
+        {% elif boarding_status == "Ended"  %}
             <div class="message_box">
                 <h3>Boarding has ended</h3>
             </div>
