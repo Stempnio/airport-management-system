@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'general/style.css' %}">
+
+    {% block head %}
+
+    {% endblock head %}
+</head>
+<body>
+{% if user.is_authenticated %}
+    {% block user_authenticated %}
+
+    {% endblock user_authenticated %}
+{% else %}
+    <div style="display: flex; align-items: center; flex-direction: column; margin-top:50px">
+        <h1 class="message_box" style="color:white; margin:20px">Access denied</h1>
+        <h2 style="margin-top:20px">You don't have permissions to access this page. </h2>
+        <h2>Please log in or contact an administrator.</h2>
+        <a href="/flights/login" style="margin-top:15px">
+            <button class="btn" style="font-size: 15px">Go to login page</button>
+        </a>
+    </div>
+{% endif%}
+
+<script src="{% static 'general/scripts.js' %}"></script>
+</body>
+</html>

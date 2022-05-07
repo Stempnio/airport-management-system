@@ -1,11 +1,7 @@
+{% extends "base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+{% block head %}
     <link rel="stylesheet" href="{% static 'boarding_page/style.css' %}">
-    <link rel="stylesheet" href="{% static 'general/style.css' %}">
     <style>
         .end-boarding-btn {
             transition-duration: 0.4s;
@@ -28,9 +24,9 @@
             document.getElementById("submit-btn").scrollIntoView();
         }
     </script>
-</head>
-<body>
-{% if user.is_authenticated %}
+{% endblock head %}
+
+{% block user_authenticated %}
     <header>
         <h4 class="menu_item" id="time"></h4>
 
@@ -123,9 +119,5 @@
             </div>
         {% endif %}
     </form>
-{% else %}
-    <h1>Access forbidden! Please log in bro</h1>
-{% endif %}
-<script src="{% static 'general/scripts.js' %}"></script>
-</body>
-</html>
+
+{% endblock user_authenticated %}

@@ -1,14 +1,11 @@
+{% extends "base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link rel="stylesheet" href="{% static 'general/style.css' %}">
+{% block head %}
     <link rel="stylesheet" href="{% static 'flight_list_page/style.css' %}">
-    <meta charset="UTF-8">
     <title>Flight list</title>
-</head>
-<body>
-{% if user.is_authenticated %}
+{% endblock head %}
+
+{% block user_authenticated %}
 
     <header>
         <h4 class="menu_item" id="time"></h4>
@@ -56,10 +53,4 @@
             </a>
         {% endfor %}
     </div>
-{% else %}
-    <h1>Access forbidden! Please log in bro</h1>
-{%  endif %}
-
-<script src="{% static 'general/scripts.js' %}"></script>
-</body>
-</html>
+{% endblock user_authenticated %}
