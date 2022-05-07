@@ -15,6 +15,9 @@
 
     {% endblock user_authenticated %}
 {% else %}
+    {% for message in messages %}
+    {% endfor %}
+
     <div style="display: flex; align-items: center; flex-direction: column; margin-top:50px">
         <h1 class="message_box" style="color:white; margin:20px">Access denied</h1>
         <h2 style="margin-top:20px">You don't have permissions to access this page. </h2>
