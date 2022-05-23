@@ -5,9 +5,9 @@
 # **<p align="center">Boarding system dla portu lotniczego</p><br>**
 
 
-### **<p align="right">Bartłomiej Szwaja</p>**
-### **<p align="right">Yurii  Titov</p>**
-### **<p align="right">Jakub Stępień</p><br>**  
+### **<p align="right"><a href="https://github.com/verduttio">Bartłomiej Szwaja</a></p>**
+### **<p align="right"><a href="https://github.com/YuriiBatkovych">Yurii  Titov</a></p>**
+### **<p align="right"><a href="https://github.com/Stempnio">Jakub Stępień</a></p><br>**  
 
 
 # <p align="center">Spis treści</p>  
